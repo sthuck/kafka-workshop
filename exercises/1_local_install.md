@@ -2,6 +2,7 @@
 
 Follow these steps if you want to set up a 3-broker Kafka cluster on a single machine. This environment is not suitable for production, but it provides all the features necessary to complete this workshop.
 
+**download** - https://archive.apache.org/dist/kafka/2.8.1/kafka_2.13-2.8.1.tgz
 ## Starting ZooKeeper
 
 The first step is to get ZooKeeper running. This is necessary in order to start Kafka:

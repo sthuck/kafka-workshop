@@ -16,6 +16,12 @@
 
     <!-- Jacek: custom formatting -->
     <link rel="stylesheet" href="revealjs-css/jacek.css">
+    <script src="plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    plugins: [ RevealHighlight ]
+  });
+</script>
 
     <!-- Printing and PDF exports -->
     <script>
@@ -289,6 +295,23 @@
             1. Elastic, highly scalable, fault-tolerant
             1. [Home Page](https://kafka.apache.org/documentation/streams/)
           </textarea>
+        </section>
+        <section id="kafka-streams2" style="font-size: 80%">
+          <br>
+          <pre><code data-trim data-noescape>
+            final Pattern pattern = Pattern.compile("\\W+");
+            KStream counts  = source.flatMapValues(value-> 
+              Arrays.asList(pattern.split(value.toLowerCase())))
+                    .map((key, value) -> new KeyValue<Object, Object>(value, value))
+                    .filter((key, value) -> (!value.equals("the")))
+                    .groupByKey()
+                    .count().mapValues(value->Long.toString(value)).toStream();
+            counts.to("wordcount-output");
+          </code></pre>
+          <p>
+            Kafka streams handles saving local state for you, and publishing to output stream.
+          </p>
+            
         </section>
 
         <section id="kafka-connect" data-markdown>
